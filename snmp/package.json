@@ -1,0 +1,18 @@
+{
+  "name": "snmp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "new_index.js",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "mysql": "^2.18.1",
+    "net-snmp": "^3.5.5",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,74 @@
+version: '3.9'
+services:
+  www:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: web
+    volumes:
+      - ./client:/var/www/html
+    depends_on:
+      - db:db
+    ports:
+      - "8080:80"
+    networks:
+      - default
+  sv:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: sv
+    volumes:
+      - ./server:/var/www/html
+    depends_on:
+      - db:db
+    ports:
+      - "8080:80"
+    networks:
+      - default
+  snmp:
+    build:
+      context: ./snmp
+      dockerfile: Dockerfile
+    container_name: snmp
+    volumes:
+      - ./snmp:/var/www/html
+    depends_on:
+      - db:db
+    ports:
+      - "8082:80"
+    networks:
+      - default
+  
+  db:
+    container_name: db
+    image: mysql:8.0
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+      - persistent:/var/lib/mysql
+    env_file:
+      - ./config.env
+    ports:
+      - "3306:3306"
+    networks:
+      - default
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8081:80'
+    restart: always
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: test 
+    depends_on:
+      - db:db
+volumes:
+    persistent:
+
+
+
