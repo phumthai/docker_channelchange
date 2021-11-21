@@ -10,6 +10,6 @@ CREATE TABLE IF NOT EXISTS `ap_channal_data` (
     `power5` text,
     `b24` text,
     `b5` text,
-    `apgroup` text,
+    `apgroup` text
 )
 ENGINE=InnoDB;

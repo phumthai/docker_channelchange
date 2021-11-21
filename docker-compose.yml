@@ -8,6 +8,7 @@ services:
     restart: always
     volumes:
       - ./client:/var/www/html
+      - w_dependencies:/usr/src/app/node_modules
     depends_on:
       - db
     ports:
@@ -20,6 +21,7 @@ services:
     restart: always
     volumes:
       - ./server:/var/www/html
+      - sv_dependencies:/usr/src/app/node_modules
     depends_on:
       - db
     ports:
@@ -32,6 +34,7 @@ services:
     restart: always
     volumes:
       - ./snmp:/var/www/html
+      - sm_dependencies:/usr/src/app/node_modules
     depends_on:
       - db
   
@@ -44,7 +47,7 @@ services:
       - ./dump:/docker-entrypoint-initdb.d
       - persistent:/var/lib/mysql
     env_file:
-      - ./config.env
+      - ./.env
     ports:
       - "3306:3306"
 
@@ -52,7 +55,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-      - '8081:80'
+      - '8082:80'
     restart: always
     env_file:
       - ./config.env
@@ -60,6 +63,8 @@ services:
       - db
 volumes:
     persistent:
-
+    w_dependencies:
+    sv_dependencies:
+    sm_dependencies:
 
 
