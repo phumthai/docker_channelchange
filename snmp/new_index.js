@@ -192,7 +192,7 @@ let thisdate = () => {
     var d = new Date()
     var year = d.getFullYear();
     var month = String(d.getMonth()+1).padStart(2,'0');
-    var day = String(d.getDay()+7).padStart(2,'0');
+    var day = String(d.getDate()).padStart(2,'0');
     return year + "-" + month + "-" + day; 
 }
 
@@ -270,6 +270,11 @@ async function fourth(){
             if (err) throw err;
             console.log("Number of records inserted: " + result.affectedRows);
             });
+            var sqld = "DELETE FROM ap_channal_data WHERE date < now() - interval 3 DAY";
+            con.query(sqld, function (err, result) {
+                if (err) throw err;
+                    console.log("Number of records deleted: " + result.affectedRows);
+            });
             setTimeout(function(){
                 con.end();
             },5000) 
@@ -308,5 +313,5 @@ setInterval(() => {
             })
         },30000)
     })
-}, 1000*60*10);
+}, 1000*60*5);
 
