@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS `ap_channal_data` (
     `b5` text,
     `apgroup` text
 )
-ENGINE=InnoDB;
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

@@ -298,7 +298,7 @@ async function fourth(){
     }
 }
 
-setInterval(() => {
+async function start(){
     first().then(()=>{
         setTimeout(function(){
             second().then(()=>{
@@ -313,5 +313,10 @@ setInterval(() => {
             })
         },30000)
     })
-}, 1000*60*5);
+}
+
+start();
+setInterval(() => {
+    start();
+}, 1000*60*3);
 
