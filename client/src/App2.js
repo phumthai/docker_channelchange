@@ -29,8 +29,9 @@ class App extends Component {
     let s = [];
     let name = [];
     let count = [];
-    const Ndata = [];
-    
+    let Ndata = [];
+    let sname = [];
+    let scount = [];
     axios.get('http://localhost:3001/a').then(res=>{
       for (const dataObj of res.data) {
         c.push(dataObj.apgroup);
@@ -46,10 +47,17 @@ class App extends Component {
         count.push(a[j][1]);
       }
       for(let k=0;k<name.length;k++){
-        const ddd = {};
-        ddd.x = name[k];
-        ddd.y = count[k];
-        Ndata.push(ddd)
+        let ddd = [];
+        ddd.push(name[k])
+        ddd.push(count[k])
+        Ndata.push(ddd);
+      }
+      Ndata.sort(function(a,b) {
+        return b[1] - a[1];
+      });
+      for(let l=0;l<10;l++){
+        sname.push(Ndata[l][0]);
+        scount.push(Ndata[l][1]);
       }
       
     }).catch(err =>{
@@ -57,11 +65,11 @@ class App extends Component {
     })
     this.setState({
       chartData:{
-        labels: name,
+        labels: sname,
         datasets:[
           {
             label:'Channel 5GHz Frequency',
-            data:count,
+            data:scount,
             backgroundColor:[
               'rgba(255,0,0, 0.6)',
               'rgba(0,255,0, 0.6)',
@@ -89,7 +97,7 @@ class App extends Component {
       
       <div className="App">
         <br/><br/><br/>
-        <h1>Most Changed AP</h1>
+        <h1>Top 10 Changed AP Area</h1>
         <br/>
         <div class="chart-container">
             <Chart chartData={this.state.chartData}  legendPosition="bottom"/>
