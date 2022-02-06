@@ -94,10 +94,9 @@ class App extends Component {
 
   render() {
     return (
-      
       <div className="App">
-        <br/><br/><br/>
         <h1>Top 10 Changed AP Area</h1>
+        <p>If graph not show. "Resize" the windows</p>
         <br/>
         <div class="chart-container">
             <Chart chartData={this.state.chartData}  legendPosition="bottom"/>
