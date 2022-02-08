@@ -41,7 +41,7 @@ app.get('/b',(req,res)=>{
 // get apname number
 app.get('/c',(req,res)=>{
     //db.query("SELECT `apname` FROM `ap_channal_data` WHERE fulldate > DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY `apname`", (err,result)=>{
-    db.query("select count(*) as cou from (SELECT `apname` FROM `ap_channal_data` WHERE fulldate > DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY `apname`) as cou", (err,result)=>{     
+    db.query("select count(*) as cou from (SELECT `apname` FROM `ap_channal_data` WHERE fulldate > DATE_SUB(NOW(), INTERVAL 24 HOUR) GROUP BY `apname`) as cou", (err,result)=>{     
         let c;
         if(err){
             console.log(err);
@@ -70,7 +70,7 @@ app.get('/c',(req,res)=>{
 //test send value after modifine
 app.get('/d',(req,res)=>{
     //db.query("SELECT `apname` FROM `ap_channal_data` WHERE fulldate > DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY `apname`", (err,result)=>{
-    db.query("SELECT `apname` FROM `ap_channal_data` WHERE fulldate > DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY `apname`", (err,result)=>{     
+    db.query("SELECT `apname` FROM `ap_channal_data` WHERE fulldate > DATE_SUB(NOW(), INTERVAL 24 HOUR) GROUP BY `apname`", (err,result)=>{     
         if(err){
             console.log(err);
         }
@@ -88,7 +88,7 @@ app.get('/d',(req,res)=>{
 
 //get ap245
 app.get('/e',(req,res)=>{
-    db.query("SELECT `apname`,`channel24`, `b24`, `channel5`, `b5` FROM `ap_channal_data` WHERE fulldate > DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY `apname`", (err,result)=>{     
+    db.query("SELECT `apname`,`channel24`, `b24`, `channel5`, `b5` FROM `ap_channal_data` WHERE fulldate > DATE_SUB(NOW(), INTERVAL 24 HOUR)", (err,result)=>{     
         if(err){
             console.log(err);
         }

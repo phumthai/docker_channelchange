@@ -16,11 +16,11 @@ function App(){
 
     return (
         <div>
-            <h1>Channal 2.4 GHz Change in 24 hours(device)</h1>
+            <h1>Channal 2.4 GHz Change in 24 hours(time)</h1>
             {apcount.map((val)=>{
                 return <h3>{val.c24}</h3>
             })}
-            <h1>Channal 5 GHz Change in 24 hours(device)</h1>
+            <h1>Channal 5 GHz Change in 24 hours(time)</h1>
             {apcount.map((val)=>{
                 return <h3>{val.c5}</h3>
             })}
