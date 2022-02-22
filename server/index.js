@@ -139,7 +139,7 @@ app.get('/e',(req,res)=>{
 
 //average
 app.get('/f',(req,res)=>{
-    db.query("SELECT `apname`, COUNT(*) AS apcount FROM `ap_channal_data` fulldate > DATE_SUB(NOW(), INTERVAL 24 HOUR) GROUP BY `apname` ORDER BY 2 DESC", (err,result)=>{
+    db.query("SELECT `apname`, COUNT(*) AS apcount FROM `ap_channal_data` WHERE fulldate > DATE_SUB(NOW(), INTERVAL 24 HOUR) GROUP BY `apname` ORDER BY 2 DESC", (err,result)=>{
         if(err){
             console.log(err);
         }
