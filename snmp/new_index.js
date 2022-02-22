@@ -270,7 +270,7 @@ async function fourth(){
             if (err) throw err;
             console.log("Number of records inserted: " + result.affectedRows);
             });
-            var sqld = "DELETE FROM ap_channal_data WHERE fulldate < now() - interval 48 HOUR";
+            var sqld = "DELETE FROM ap_channal_data WHERE fulldate < now() - interval 720 HOUR";
             con.query(sqld, function (err, result) {
                 if (err) throw err;
                     console.log("Number of records deleted: " + result.affectedRows);

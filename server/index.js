@@ -16,7 +16,7 @@ const db = mysql.createConnection({
 
 //get all
 app.get('/a',(req,res)=>{
-    db.query("SELECT * FROM ap_channal_data", (err,result)=>{
+    db.query("SELECT * FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 24 HOUR)", (err,result)=>{
         if(err){
             console.log(err);
         }
@@ -28,7 +28,7 @@ app.get('/a',(req,res)=>{
 
 // get apname + group + top 10
 app.get('/b',(req,res)=>{
-    db.query("SELECT `apname`, COUNT(*) AS apcount FROM `ap_channal_data` GROUP BY `apname` ORDER BY 2 DESC LIMIT 10", (err,result)=>{
+    db.query("SELECT `apname`, COUNT(*) AS apcount FROM `ap_channal_data` WHERE fulldate > DATE_SUB(NOW(), INTERVAL 24 HOUR) GROUP BY `apname` ORDER BY 2 DESC LIMIT 10", (err,result)=>{
         if(err){
             console.log(err);
         }
@@ -139,7 +139,7 @@ app.get('/e',(req,res)=>{
 
 //average
 app.get('/f',(req,res)=>{
-    db.query("SELECT `apname`, COUNT(*) AS apcount FROM `ap_channal_data` GROUP BY `apname` ORDER BY 2 DESC", (err,result)=>{
+    db.query("SELECT `apname`, COUNT(*) AS apcount FROM `ap_channal_data` fulldate > DATE_SUB(NOW(), INTERVAL 24 HOUR) GROUP BY `apname` ORDER BY 2 DESC", (err,result)=>{
         if(err){
             console.log(err);
         }
