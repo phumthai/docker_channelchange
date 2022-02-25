@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Chart from './components/Chart1';
 import axios from 'axios';
 import {useState} from 'react';
-
+import Dates from './date.js'
 
 class App extends Component {
   
@@ -31,8 +31,13 @@ class App extends Component {
     let time = [];
     let count = [];
     const Tdata = [];
+
+    const storage = require('node-sessionstorage')
+    var sdate = storage.getItem('date')
+
     
-    axios.get('http://localhost:3001/a').then(res=>{
+
+    axios.get('http://localhost:3001/a/'+sdate).then(res=>{
       for (const dataObj of res.data) {
         c.push(parseInt(dataObj.channel5));
         tt.push(dataObj.time);
@@ -79,10 +84,12 @@ class App extends Component {
   }
 
   render() {
+    const storage = require('node-sessionstorage')
+    var sdate = storage.getItem('date')
     return (
       
       <div className="App">
-        <h1>AP Changed Frequency</h1>
+        <h1>AP Changed Frequency ({sdate})</h1>
         <p>If graph not show. "Resize" the windows</p>
         <br/>
         <div class="chart-container">

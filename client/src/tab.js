@@ -7,30 +7,31 @@ import Count from './count.js'
 import TotalAP from './totalAP.js'
 import Ch245 from './ch245f.js'
 import Avg from './avg.js'
-
+import Dates from './date.js'
 const Home = props => {
     const { match, history } = props;
     const { params } = match;
     const { page } = params;
-  
     const tabNameToIndex = {
-      0: "Frequency",
-      1: "Area",
-      2: "APname",
-      3: "Total",
-      4: "245",
-      5: "Average",
-      6: "Download"
+      0: "Dates",
+      1: "Frequency",
+      2: "Area",
+      3: "APname",
+      4: "Total",
+      5: "245",
+      6: "Average",
+      7: "Download"
     };
   
     const indexToTabName = {
-      frequency: 0,
-      area: 1,
-      apname: 2,
-      total: 3,
-      c245: 4,
-      average: 5,
-      download: 6
+      dates: 0,
+      frequency: 1,
+      area: 2,
+      apname: 3,
+      total: 4,
+      c245: 5,
+      average: 6,
+      download: 7,
     };
   
     const [selectedTab, setSelectedTab] = React.useState(indexToTabName[page]);
@@ -44,6 +45,7 @@ const Home = props => {
       <>
         <AppBar position="static">
           <Tabs value={selectedTab} onChange={handleChange}>
+            <Tab label="Date" />
             <Tab label="Change Frequency" />
             <Tab label="Most Area Change" />
             <Tab label="Most AP Name" />
@@ -53,13 +55,14 @@ const Home = props => {
             <Tab label="Download" />
           </Tabs>
         </AppBar>
-        {selectedTab === 0 && <App1 />}
-        {selectedTab === 1 && <App2 />}
-        {selectedTab === 2 && <Count/>}
-        {selectedTab === 3 && <TotalAP />}
-        {selectedTab === 4 && <Ch245 />}
-        {selectedTab === 5 && <Avg />}
-        {selectedTab === 6 && <App3 />}
+        {selectedTab === 0 && <Dates />}
+        {selectedTab === 1 && <App1 />}
+        {selectedTab === 2 && <App2 />}
+        {selectedTab === 3 && <Count/>}
+        {selectedTab === 4 && <TotalAP />}
+        {selectedTab === 5 && <Ch245 />}
+        {selectedTab === 6 && <Avg />}
+        {selectedTab === 7 && <App3 />}
       </>
     );
   };

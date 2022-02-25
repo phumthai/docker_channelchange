@@ -15,8 +15,9 @@ const db = mysql.createConnection({
 })
 
 //get all
-app.get('/a',(req,res)=>{
-    db.query("SELECT * FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 24 HOUR)", (err,result)=>{
+app.get('/a/:dates',(req,res)=>{
+    let dates = req.params.dates;
+    db.query("SELECT * FROM ap_channal_data WHERE date=\'"+dates+"\'", (err,result)=>{
         if(err){
             console.log(err);
         }
