@@ -18,6 +18,15 @@ class Chart extends Component{
   }
 
   render(){
+    const storage = require('node-sessionstorage')
+    var sdate = storage.getItem('date')
+    var fdate="";
+    if(sdate==="3-days"){
+      fdate = "day";
+    }
+    else{
+      fdate = "hour"
+    }
     return (
       <div className="chart">
 
@@ -38,7 +47,8 @@ class Chart extends Component{
               x:{
                 type: 'time',
                 time: {
-                  unit: 'day'
+                  unit: fdate
+                  
                 }
               },
               y: {

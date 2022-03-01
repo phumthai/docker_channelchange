@@ -32,7 +32,11 @@ class App extends Component {
     let Ndata = [];
     let sname = [];
     let scount = [];
-    axios.get('http://localhost:3001/a').then(res=>{
+
+    const storage = require('node-sessionstorage')
+    var sdate = storage.getItem('date')
+
+    axios.get('http://localhost:3001/a/'+sdate).then(res=>{
       for (const dataObj of res.data) {
         c.push(dataObj.apgroup);
       }
@@ -93,9 +97,11 @@ class App extends Component {
   }
 
   render() {
+    const storage = require('node-sessionstorage')
+    var sdate = storage.getItem('date')
     return (
       <div className="App">
-        <h1>Top 10 Changed AP Area</h1>
+        <h1>Top 10 Changed AP Area ({sdate})</h1>
         <p>If graph not show. "Resize" the windows</p>
         <br/>
         <div class="chart-container">

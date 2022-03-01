@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 
 function App(){
     const [apcount, setapcount] = useState([])
-
+    const storage = require('node-sessionstorage')
+    var sdate = storage.getItem('date')
     useEffect(()=>{
-        axios.get('http://localhost:3001/f').then((res)=>{
+        axios.get('http://localhost:3001/f/'+sdate).then((res)=>{
             setapcount(res.data)
         })
     },[])
@@ -16,7 +17,7 @@ function App(){
 
     return (
         <div>
-            <h1>Average change in last 24 hours(time)</h1>
+            <h1>Average change in {sdate}</h1>
             {apcount.map((val)=>{
                 return <h3>{val.avg}</h3>
             })}
