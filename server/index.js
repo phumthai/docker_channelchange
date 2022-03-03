@@ -18,7 +18,7 @@ const db = mysql.createConnection({
 app.get('/a/:dates',(req,res)=>{
     let dates = req.params.dates;
     if(dates=="3-days"){
-        db.query("SELECT * FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 48 HOUR)", (err,result)=>{
+        db.query("SELECT * FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 72 HOUR)", (err,result)=>{
             if(err){
                 console.log(err);
             }

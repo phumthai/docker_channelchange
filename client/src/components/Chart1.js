@@ -21,7 +21,7 @@ class Chart extends Component{
     const storage = require('node-sessionstorage')
     var sdate = storage.getItem('date')
     var fdate="";
-    if(sdate==="3-days"){
+    if(sdate==="3-days"||sdate==="7-days"||sdate==="30-days"){
       fdate = "day";
     }
     else{
