@@ -284,6 +284,43 @@ app.get('/f/:dates',(req,res)=>{
     
 })
 
+app.post('/login',(req,res)=>{
+    let username = req.body.username;
+    let password = req.body.password;
+    let cols = [username];
+    db.query('SELECT * FROM user WHERE username = ? LIMIT 1',cols,(err,data,fields) => {
+        if(err){
+            res.json({
+                success: false,
+                msg: 'An error occured, please try again'
+            })
+            return;
+        }
+        if(data && data.length === 1){
+            if(data[0].password===password){
+                res.json({
+                    success: true,
+                    username: data[0].username
+                })
+                return;
+            }
+            else{
+                res.json({
+                    success: false,
+                    msg: 'Invalid password'
+                })
+            }
+        }else{
+            res.json({
+                success: false,
+                msg: 'User not found, please try again'
+            })
+        }
+    })
+    
+})
+
+
 app.listen('3001',()=>{
     console.log("Server is running on port 3001");
 })
