@@ -118,9 +118,9 @@ var maxRepetitions = 20;
 // The maxRepetitions argument is optional, and will be ignored unless using
 // SNMP verison 2c
 var Controler = [
-    "10.71.0.3",
-    "10.71.0.7",
-    "10.71.0.8"
+    "10.71.0.48",
+    "10.71.0.45",
+    "10.71.0.46"
 ]
 
 async function first(){

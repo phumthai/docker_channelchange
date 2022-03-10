@@ -17,12 +17,12 @@ export const SortingTable = () => {
     
   useEffect(()=>{
       const loadPost = async () => {
-          setLoading(true)
+          setLoading(true);
           const response = await axios.get(
             'http://localhost:3001/ba/'+sdate
-          )
-          setapcount(response.data)
-          setLoading(false)
+          );
+          setapcount(response.data);
+          setLoading(false);
       }
       loadPost();
   },[])
