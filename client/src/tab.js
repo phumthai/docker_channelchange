@@ -8,6 +8,7 @@ import TotalAP from './totalAP.js'
 import Ch245 from './ch245f.js'
 import Avg from './avg.js'
 import Dates from './date.js'
+import { SortingTable } from "./table/sortingTable.js";
 const Home = props => {
     const { match, history } = props;
     const { params } = match;
@@ -20,7 +21,8 @@ const Home = props => {
       4: "Total",
       5: "245",
       6: "Average",
-      7: "Download"
+      7: "Download",
+      8: "Sorting"
     };
   
     const indexToTabName = {
@@ -32,6 +34,7 @@ const Home = props => {
       c245: 5,
       average: 6,
       download: 7,
+      sorting: 8
     };
   
     const [selectedTab, setSelectedTab] = React.useState(indexToTabName[page]);
@@ -53,6 +56,7 @@ const Home = props => {
             <Tab label="Channal Devices Change" />
             <Tab label="Average" />
             <Tab label="Download" />
+            <Tab label="Sorting" />
           </Tabs>
         </AppBar>
         {selectedTab === 0 && <Dates />}
@@ -63,6 +67,7 @@ const Home = props => {
         {selectedTab === 5 && <Ch245 />}
         {selectedTab === 6 && <Avg />}
         {selectedTab === 7 && <App3 />}
+        {selectedTab === 8 && <SortingTable />}
       </>
     );
   };

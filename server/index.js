@@ -83,6 +83,32 @@ app.get('/b/:dates',(req,res)=>{
     
 })
 
+// get apname + group
+app.get('/ba/:dates',(req,res)=>{
+    let dates = req.params.dates;
+    if(dates=="3-days"){
+        db.query("SELECT `apname`, COUNT(*) AS apcount FROM `ap_channal_data` WHERE fulldate > DATE_SUB(NOW(), INTERVAL 72 HOUR) GROUP BY `apname` ORDER BY 2 DESC", (err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }
+    else{
+        db.query("SELECT `apname`, COUNT(*) AS apcount FROM `ap_channal_data` WHERE date=\'"+dates+"\' GROUP BY `apname` ORDER BY 2 DESC", (err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }
+    
+})
+
 // get apname number
 app.get('/c/:dates',(req,res)=>{
     let dates = req.params.dates;

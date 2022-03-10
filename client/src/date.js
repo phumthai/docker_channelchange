@@ -34,7 +34,7 @@ function App () {
   x = x.substring(1)
   const storage = require('node-sessionstorage')
   storage.setItem('date', x)
-  //console.log(storage.getItem('date'))
+  console.log(storage.getItem('date'))
   return (
     <div className='App'>
       <CssBaseline />
