@@ -23,19 +23,16 @@ export const SortingTable = () => {
           );
           setapcount(response.data);
           setLoading(false);
+          
       }
+      
       loadPost();
   },[])
-  console.log(storage)
-//   useEffect(()=>{
-//     axios.get('http://localhost:3001/ba/'+sdate).then((res)=>{
-//           setapcount(res.data)
-//       })
-//   },[])
+  console.log(apcount)
   const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => apcount, [])
+  const data = useMemo(() => apcount)
 
-
+  
   const {
     getTableProps,
     getTableBodyProps,
@@ -50,8 +47,8 @@ export const SortingTable = () => {
     },
     useSortBy
   )
-
   return (
+    
     <>
     {loading ? (
         <h4>Loading ...</h4>
