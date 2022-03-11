@@ -346,6 +346,32 @@ app.post('/login',(req,res)=>{
     
 })
 
+// get data
+app.get('/data/:dates',(req,res)=>{
+    let dates = req.params.dates;
+    if(dates=="3-days"){
+        db.query("SELECT `fulldate`, `apname`, `channel24`, `power24`, `channel5`, `power5` FROM `ap_channal_data` WHERE fulldate > DATE_SUB(NOW(), INTERVAL 72 HOUR)", (err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }
+    else{
+        db.query("SELECT `fulldate`, `apname`, `channel24`, `power24`, `channel5`, `power5` FROM `ap_channal_data` WHERE date=\'"+dates+"\'", (err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }
+    
+})
+
 
 app.listen('3001',()=>{
     console.log("Server is running on port 3001");

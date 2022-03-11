@@ -15,47 +15,44 @@ export const COLUMNS = [
   }
 ]
 
-export const GROUPED_COLUMNS = [
+export const COLUMNS2 = [
   {
-    Header: 'Id',
-    Footer: 'Id',
-    accessor: 'id'
+    Header: 'Date',
+    Footer: 'Date',
+    accessor: 'fulldate',
+    sticky: 'left',
+    Cell: ({ value }) => {
+      return format(new Date(value), 'dd/MM/yyyy HH:mm:ss')
+    }
   },
   {
-    Header: 'Name',
-    Footer: 'Name',
-    columns: [
-      {
-        Header: 'First Name',
-        Footer: 'First Name',
-        accessor: 'first_name'
-      },
-      {
-        Header: 'Last Name',
-        Footer: 'Last Name',
-        accessor: 'last_name'
-      }
-    ]
+    Header: 'AP Name',
+    Footer: 'AP Name',
+    accessor: 'apname',
+    sticky: 'left'
   },
   {
-    Header: 'Info',
-    Footer: 'Info',
-    columns: [
-      {
-        Header: 'Date of Birth',
-        Footer: 'Date of Birth',
-        accessor: 'date_of_birth'
-      },
-      {
-        Header: 'Country',
-        Footer: 'Country',
-        accessor: 'country'
-      },
-      {
-        Header: 'Phone',
-        Footer: 'Phone',
-        accessor: 'phone'
-      }
-    ]
+    Header: 'Channal 2.4G',
+    Footer: 'Channal 2.4G',
+    accessor: 'channel24',
+    sticky: 'left'
+  },
+  {
+    Header: 'Power 2.4G',
+    Footer: 'Power 2.4G',
+    accessor: 'power24',
+    sticky: 'left'
+  },
+  {
+    Header: 'Channal 5G',
+    Footer: 'Channal 5G',
+    accessor: 'channel5',
+    sticky: 'left'
+  },
+  {
+    Header: 'Power 2.4G',
+    Footer: 'Power 2.4G',
+    accessor: 'power5',
+    sticky: 'left'
   }
 ]

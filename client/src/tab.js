@@ -9,6 +9,7 @@ import Ch245 from './ch245f.js'
 import Avg from './avg.js'
 import Dates from './date.js'
 import { SortingTable } from "./table/sortingTable.js";
+import { FilteringTable } from "./table/fillterTable.js";
 const Home = props => {
     const { match, history } = props;
     const { params } = match;
@@ -17,24 +18,24 @@ const Home = props => {
       0: "Dates",
       1: "Frequency",
       2: "Area",
-      3: "APname",
-      4: "Total",
-      5: "245",
-      6: "Average",
-      7: "Download",
-      8: "Sorting"
+      3: "APcount",
+      4: "Fulldata",
+      5: "Total",
+      6: "245",
+      7: "Average",
+      8: "Download",
     };
   
     const indexToTabName = {
       dates: 0,
       frequency: 1,
       area: 2,
-      apname: 3,
-      total: 4,
-      c245: 5,
-      average: 6,
-      download: 7,
-      sorting: 8
+      sorting: 3,
+      fulldata: 4,
+      total: 5,
+      c245: 6,
+      average: 7,
+      download: 8,
     };
   
     const [selectedTab, setSelectedTab] = React.useState(indexToTabName[page]);
@@ -51,23 +52,23 @@ const Home = props => {
             <Tab label="Date" />
             <Tab label="Change Frequency" />
             <Tab label="Most Area Change" />
-            <Tab label="Most AP Name" />
+            <Tab label="AP count" />
+            <Tab label="Full Data" />
             <Tab label="Devices Total" />
             <Tab label="Channal Devices Change" />
             <Tab label="Average" />
             <Tab label="Download" />
-            <Tab label="Sorting" />
           </Tabs>
         </AppBar>
         {selectedTab === 0 && <Dates />}
         {selectedTab === 1 && <App1 />}
         {selectedTab === 2 && <App2 />}
-        {selectedTab === 3 && <Count/>}
-        {selectedTab === 4 && <TotalAP />}
-        {selectedTab === 5 && <Ch245 />}
-        {selectedTab === 6 && <Avg />}
-        {selectedTab === 7 && <App3 />}
-        {selectedTab === 8 && <SortingTable />}
+        {selectedTab === 3 && <SortingTable />}
+        {selectedTab === 4 && <FilteringTable />}
+        {selectedTab === 5 && <TotalAP />}
+        {selectedTab === 6 && <Ch245 />}
+        {selectedTab === 7 && <Avg />}
+        {selectedTab === 8 && <App3 />}
       </>
     );
   };
