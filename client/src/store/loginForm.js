@@ -82,7 +82,7 @@ class LoginForm extends React.Component {
                 />
                 <InputField 
                     type='password'
-                    placeholder='Psername'
+                    placeholder='Password'
                     value={this.state.password ? this.state.password : ''}
                     onChange={ (val) => this.setInputValue('password',val)}
                 />

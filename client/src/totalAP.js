@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
-
+import Ch245 from './ch245f.js'
+import Avg from './avg.js'
 function App(){
     const [apcount, setapcount] = useState([])
     const storage = require('node-sessionstorage')
@@ -16,12 +17,16 @@ function App(){
 
 
     return (
+        <>
         <div>
             <h1>Number of AP change in {sdate}</h1>
             {apcount.map((val)=>{
                 return <h3>{val.cou}</h3>
             })}
         </div>
+        <Ch245></Ch245>
+        <Avg></Avg>
+        </>
     );
 }
 
