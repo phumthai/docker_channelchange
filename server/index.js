@@ -58,31 +58,49 @@ app.get('/a/:dates',(req,res)=>{
     }
 })
 
-// get apname + group + top 10
-// app.get('/b/:dates',(req,res)=>{
-//     let dates = req.params.dates;
-//     if(dates=="3-days"){
-//         db.query("SELECT `apname`, COUNT(*) AS apcount FROM `ap_channal_data` WHERE fulldate > DATE_SUB(NOW(), INTERVAL 72 HOUR) GROUP BY `apname` ORDER BY 2 DESC LIMIT 10", (err,result)=>{
-//             if(err){
-//                 console.log(err);
-//             }
-//             else{
-//                 res.send(result);
-//             }
-//         })
-//     }
-//     else{
-//         db.query("SELECT `apname`, COUNT(*) AS apcount FROM `ap_channal_data` WHERE date=\'"+dates+"\' GROUP BY `apname` ORDER BY 2 DESC LIMIT 10", (err,result)=>{
-//             if(err){
-//                 console.log(err);
-//             }
-//             else{
-//                 res.send(result);
-//             }
-//         })
-//     }
-    
-// })
+app.get('/ab/:dates',(req,res)=>{
+    let dates = req.params.dates;
+    let startDate = dates.split(' to ')[0]
+    let endDate = dates.split(' to ')[1]
+    if(dates==="3-days"){
+        db.query("SELECT fulldate,date,time,COUNT(*) as c FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 72 HOUR) GROUP BY fulldate,date,time", (err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }else if(dates==="7-days"){
+        db.query("SELECT fulldate,date,time,COUNT(*) as c FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 7 DAY) GROUP BY fulldate,date,time", (err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }else if(dates==="30-days"){
+        db.query("SELECT fulldate,date,time,COUNT(*) as c FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY fulldate,date,time", (err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }
+    else{
+        db.query("SELECT * FROM ap_channal_data WHERE date=\'"+startDate+"\'", (err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }
+})
 
 // get apname + group
 app.get('/ba/:dates',(req,res)=>{
