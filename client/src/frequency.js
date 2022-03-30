@@ -39,7 +39,7 @@ class App extends Component {
     if(sdate==="7-days"||sdate==="30-days"){
       axios.get('http://localhost:3001/ab/'+sdate).then(res=>{
       for (const dataObj of res.data) {
-        c.push(parseInt(dataObj.channel5));
+        c.push(parseInt(dataObj.co));
         tt.push(dataObj.time);
         td.push(dataObj.date)
       }
@@ -99,29 +99,19 @@ class App extends Component {
       })
     }
     else{
-      axios.get('http://localhost:3001/a/'+sdate).then(res=>{
+      axios.get('http://localhost:3001/ab/'+sdate).then(res=>{
       for (const dataObj of res.data) {
-        c.push(parseInt(dataObj.channel5));
+        c.push(parseInt(dataObj.co));
         tt.push(dataObj.time);
         td.push(dataObj.date)
       }
       for(let x=0;x<td.length;x++){
         t.push(td[x]+"T"+tt[x])
       }
-      r = Object.entries(t);
-      for(let i=0;i<r.length;i++){
-        s.push(r[i][1]);
-      }
-      var result = s.reduce((r,c) => (r[c] = (r[c] || 0) + 1, r), {})
-      let a = Object.entries(result)
-      for(let j=0;j<a.length;j++){
-        time.push(a[j][0]);
-        count.push(a[j][1]);
-      }
-      for(let k=0;k<time.length;k++){
+      for(let k=0;k<t.length;k++){
         const ddd = {};
-        ddd.x = time[k];
-        ddd.y = count[k];
+        ddd.x = t[k];
+        ddd.y = c[k];
         Tdata.push(ddd)
       }
         console.log("Not bug, it feature ( ͡° ͜ʖ ͡° )")

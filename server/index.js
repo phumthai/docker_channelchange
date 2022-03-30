@@ -63,7 +63,7 @@ app.get('/ab/:dates',(req,res)=>{
     let startDate = dates.split(' to ')[0]
     let endDate = dates.split(' to ')[1]
     if(dates==="3-days"){
-        db.query("SELECT fulldate,date,time,COUNT(*) as c FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 72 HOUR) GROUP BY fulldate,date,time", (err,result)=>{
+        db.query("SELECT fulldate,date,time,COUNT(*) as co FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 72 HOUR) GROUP BY fulldate,date,time", (err,result)=>{
             if(err){
                 console.log(err);
             }
@@ -72,7 +72,7 @@ app.get('/ab/:dates',(req,res)=>{
             }
         })
     }else if(dates==="7-days"){
-        db.query("SELECT fulldate,date,time,COUNT(*) as c FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 7 DAY) GROUP BY fulldate,date,time", (err,result)=>{
+        db.query("SELECT fulldate,date,time,COUNT(*) as co FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 7 DAY) GROUP BY fulldate,date,time", (err,result)=>{
             if(err){
                 console.log(err);
             }
@@ -81,7 +81,7 @@ app.get('/ab/:dates',(req,res)=>{
             }
         })
     }else if(dates==="30-days"){
-        db.query("SELECT fulldate,date,time,COUNT(*) as c FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY fulldate,date,time", (err,result)=>{
+        db.query("SELECT fulldate,date,time,COUNT(*) as co FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY fulldate,date,time", (err,result)=>{
             if(err){
                 console.log(err);
             }
@@ -91,7 +91,7 @@ app.get('/ab/:dates',(req,res)=>{
         })
     }
     else{
-        db.query("SELECT * FROM ap_channal_data WHERE date=\'"+startDate+"\'", (err,result)=>{
+        db.query("SELECT fulldate,date,time,COUNT(*) as co FROM ap_channal_data WHERE date=\'"+startDate+"\' GROUP BY fulldate,date,time", (err,result)=>{
             if(err){
                 console.log(err);
             }
