@@ -14,10 +14,11 @@ const db = mysql.createConnection({
     database: process.env.MYSQL_DATABASE
 })
 
-//get all changefrequency mostareachange
+//get all 
 app.get('/a/:dates',(req,res)=>{
     let dates = req.params.dates;
     let startDate = dates.split(' to ')[0]
+    let endDate = dates.split(' to ')[1]
     if(dates==="3-days"){
         db.query("SELECT * FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 72 HOUR)", (err,result)=>{
             if(err){
@@ -47,7 +48,52 @@ app.get('/a/:dates',(req,res)=>{
         })
     }
     else{
-        db.query("SELECT * FROM ap_channal_data WHERE date=\'"+startDate+"\'", (err,result)=>{
+        db.query("SELECT * FROM ap_channal_data WHERE date>=\'"+startDate+"\' AND date<=\'"+endDate+"\'", (err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }
+})
+
+//get top
+app.get('/aa/:dates',(req,res)=>{
+    let dates = req.params.dates;
+    let startDate = dates.split(' to ')[0]
+    let endDate = dates.split(' to ')[1]
+    if(dates==="3-days"){
+        db.query("SELECT apgroup,COUNT(*) as co FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 72 HOUR) GROUP BY `apgroup` ORDER BY 2 DESC LIMIT 10", (err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }else if(dates==="7-days"){
+        db.query("SELECT apgroup,COUNT(*) as co FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 7 DAY) GROUP BY `apgroup` ORDER BY 2 DESC LIMIT 10", (err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }else if(dates==="30-days"){
+        db.query("SELECT apgroup,COUNT(*) as co FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY `apgroup` ORDER BY 2 DESC LIMIT 10", (err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }
+    else{
+        db.query("SELECT apgroup,COUNT(*) as co FROM ap_channal_data WHERE date>=\'"+startDate+"\' AND date<=\'"+endDate+"\' GROUP BY `apgroup` ORDER BY 2 DESC LIMIT 10", (err,result)=>{
             if(err){
                 console.log(err);
             }
@@ -72,7 +118,7 @@ app.get('/ab/:dates',(req,res)=>{
             }
         })
     }else if(dates==="7-days"){
-        db.query("SELECT fulldate,date,time,COUNT(*) as co FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 7 DAY) GROUP BY fulldate,date,time", (err,result)=>{
+        db.query("SELECT date,time,HOUR(fulldate) as hh,COUNT(*) as co FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 7 DAY) GROUP BY date,hh", (err,result)=>{
             if(err){
                 console.log(err);
             }
@@ -81,7 +127,7 @@ app.get('/ab/:dates',(req,res)=>{
             }
         })
     }else if(dates==="30-days"){
-        db.query("SELECT fulldate,date,time,COUNT(*) as co FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY fulldate,date,time", (err,result)=>{
+        db.query("SELECT date,time,HOUR(fulldate) as hh,COUNT(*) as co FROM ap_channal_data WHERE fulldate > DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY date,hh", (err,result)=>{
             if(err){
                 console.log(err);
             }
@@ -91,14 +137,26 @@ app.get('/ab/:dates',(req,res)=>{
         })
     }
     else{
-        db.query("SELECT fulldate,date,time,COUNT(*) as co FROM ap_channal_data WHERE date=\'"+startDate+"\' GROUP BY fulldate,date,time", (err,result)=>{
-            if(err){
-                console.log(err);
-            }
-            else{
-                res.send(result);
-            }
-        })
+        if(Date.parse(endDate)-Date.parse(startDate)<=172800000){
+            db.query("SELECT fulldate,date,time,COUNT(*) as co FROM ap_channal_data WHERE date>=\'"+startDate+"\' AND date<=\'"+endDate+"\' GROUP BY fulldate,date,time", (err,result)=>{
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    res.send(result);
+                }
+            })
+        }
+        else{
+            db.query("SELECT date,time,HOUR(fulldate) as hh,COUNT(*) as co FROM ap_channal_data WHERE date>=\'"+startDate+"\' AND date<=\'"+endDate+"\' GROUP BY date,hh", (err,result)=>{
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    res.send(result);
+                }
+            })
+        }
     }
 })
 

@@ -36,7 +36,7 @@ class App extends Component {
     const storage = require('node-sessionstorage')
     var sdate = storage.getItem('date')
 
-    if(sdate==="7-days"||sdate==="30-days"){
+    if(sdate==="3-days"||sdate==="7-days"||sdate==="30-days"){
       axios.get('http://localhost:3001/ab/'+sdate).then(res=>{
       for (const dataObj of res.data) {
         c.push(parseInt(dataObj.co));
@@ -47,50 +47,10 @@ class App extends Component {
       for(let x=0;x<td.length;x++){
         t.push(td[x]+"T"+tt[x])
       }
-      r = Object.entries(t);
-      for(let i=0;i<r.length;i++){
-        s.push(r[i][1]);
-      }
-      var result = s.reduce((r,c) => (r[c] = (r[c] || 0) + 1, r), {})
-      let a = Object.entries(result)
-      for(let j=0;j<a.length;j++){
-        time.push(a[j][0]);
-        count.push(a[j][1]);
-      }
-      for(let m=0;m<=time.length;m++){
-        let tc = [];
-        let pd = Date.parse(time[m])
-        tc.push(pd)
-        tc.push(time[m])
-        tc.push(count[m])
-        fulldata.push(tc)
-        tc = [];
-      }
-      let mx=[0,"t",0];
-      let pt = fulldata[0][0];
-      for(let n=0;n<=fulldata.length;n++){
-        if(fulldata[n][0]<pt+3600000){
-          if(mx[2]<fulldata[n][2]){
-            mx = fulldata[n]
-          }
-        }else{
-          pt = fulldata[n][0]
-          filldata.push(mx)
-          mx=fulldata[n]
-        }
-        if(n==fulldata.length-1){
-          if(mx[2]<fulldata[n][2]){
-            filldata.push(fulldata[n])
-          }else{
-            filldata.push(mx)
-          }
-        }
-      }
-      console.log(filldata)
-      for(let k=0;k<time.length;k++){
+      for(let k=0;k<t.length;k++){
         const ddd = {};
-        ddd.x = time[k];
-        ddd.y = count[k];
+        ddd.x = t[k];
+        ddd.y = c[k];
         Tdata.push(ddd)
       }
         console.log("Not bug, it feature ( ͡° ͜ʖ ͡° )")

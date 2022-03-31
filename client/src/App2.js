@@ -35,35 +35,18 @@ class App extends Component {
 
     const storage = require('node-sessionstorage')
     var sdate = storage.getItem('date')
+    let startDate = sdate.split(' to ')[0]
+    let endDate = sdate.split(' to ')[1]
+    // 164864800000 - 1648512000000 = 172800000
+    console.log(Date.parse(startDate))
+    console.log(Date.parse(endDate))
+    console.log(Date.parse(endDate)-Date.parse(startDate))
 
-    axios.get('http://localhost:3001/a/'+sdate).then(res=>{
+    axios.get('http://localhost:3001/aa/'+sdate).then(res=>{
       for (const dataObj of res.data) {
-        c.push(dataObj.apgroup);
+        sname.push(dataObj.apgroup);
+        scount.push(dataObj.co);
       }
-      r = Object.entries(c);
-      for(let i=0;i<r.length;i++){
-        s.push(r[i][1]);
-      }
-      var result = s.reduce((r,c) => (r[c] = (r[c] || 0) + 1, r), {})
-      let a = Object.entries(result)
-      for(let j=0;j<a.length;j++){
-        name.push(a[j][0]);
-        count.push(a[j][1]);
-      }
-      for(let k=0;k<name.length;k++){
-        let ddd = [];
-        ddd.push(name[k])
-        ddd.push(count[k])
-        Ndata.push(ddd);
-      }
-      Ndata.sort(function(a,b) {
-        return b[1] - a[1];
-      });
-      for(let l=0;l<10;l++){
-        sname.push(Ndata[l][0]);
-        scount.push(Ndata[l][1]);
-      }
-      
     }).catch(err =>{
       console.log(err)
     })

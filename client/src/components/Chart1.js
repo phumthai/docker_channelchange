@@ -20,12 +20,18 @@ class Chart extends Component{
   render(){
     const storage = require('node-sessionstorage')
     var sdate = storage.getItem('date')
+    let startDate = sdate.split(' to ')[0]
+    let endDate = sdate.split(' to ')[1]
     var fdate="";
     if(sdate==="3-days"||sdate==="7-days"||sdate==="30-days"){
       fdate = "day";
     }
-    else{
-      fdate = "hour"
+    else if(startDate===endDate){
+      fdate = "hour";
+    }else if(Date.parse(endDate)-Date.parse(startDate)<2592000000){
+      fdate = "day";
+    }else{
+      fdate = "month";
     }
     return (
       <div className="chart">
