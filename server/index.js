@@ -160,6 +160,18 @@ app.get('/ab/:dates',(req,res)=>{
     }
 })
 
+app.get('/ac',(req,res)=>{
+    db.query("SELECT fulldate,date,time,COUNT(*) as co FROM ap_channal_data GROUP BY fulldate,date,time", (err,result)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
+    })
+    
+})
+
 // get apname + group
 app.get('/ba/:dates',(req,res)=>{
     let dates = req.params.dates;

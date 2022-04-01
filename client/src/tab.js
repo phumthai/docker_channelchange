@@ -12,6 +12,7 @@ import Date2 from './date2.js'
 import { SortingTable } from "./table/sortingTable.js";
 import { FilteringTable } from "./table/fillterTable.js";
 import Freq from './frequency.js'
+import Schart from './stockgraph.js'
 const Home = props => {
     const { match, history } = props;
     const { params } = match;
@@ -57,7 +58,7 @@ const Home = props => {
           </Tabs>
         </AppBar>
         {selectedTab === 0 && <Date2 />}
-        {selectedTab === 1 && <Freq />}
+        {selectedTab === 1 && <Schart />}
         {selectedTab === 2 && <App2 />}
         {selectedTab === 3 && <SortingTable />}
         {selectedTab === 4 && <FilteringTable />}
