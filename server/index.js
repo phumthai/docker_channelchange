@@ -161,7 +161,7 @@ app.get('/ab/:dates',(req,res)=>{
 })
 
 app.get('/ac',(req,res)=>{
-    db.query("SELECT fulldate,date,time,COUNT(*) as co FROM ap_channal_data GROUP BY fulldate,date,time", (err,result)=>{
+    db.query("SELECT fulldate,date,time,COUNT(*) as co FROM ap_channal_data GROUP BY fulldate", (err,result)=>{
         if(err){
             console.log(err);
         }
@@ -170,6 +170,31 @@ app.get('/ac',(req,res)=>{
         }
     })
     
+})
+
+app.get('/ad',(req,res)=>{
+    db.query("SELECT fulldate,date,time,COUNT(*) as co FROM ap_channal_data GROUP BY fulldate", (err,result)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            let da = Object.values(JSON.parse(JSON.stringify(result)))
+            let aptt = da.map(function(obj){
+                return Date.parse(obj.fulldate);
+            })
+            let apco = da.map(function(obj){
+                return obj.co;
+            })
+            let data = [];
+            for(let i=0;i<apco.length;i++){
+                let dd = []
+                dd.push(aptt[i])
+                dd.push(apco[i])
+                data.push(dd)
+            }
+            res.send(data);
+        }
+    })
 })
 
 // get apname + group
