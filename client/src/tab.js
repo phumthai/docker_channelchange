@@ -7,11 +7,9 @@ import Count from './count.js'
 import TotalAP from './totalAP.js'
 import Ch245 from './ch245f.js'
 import Avg from './avg.js'
-import Dates from './date.js'
 import Date2 from './date2.js'
 import { SortingTable } from "./table/sortingTable.js";
 import { FilteringTable } from "./table/fillterTable.js";
-import Freq from './frequency.js'
 import Schart from './stockgraph.js'
 const Home = props => {
     const { match, history } = props;

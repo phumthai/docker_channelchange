@@ -777,26 +777,14 @@ app.get('/data/:dates',(req,res)=>{
         })
     }
     else{
-        if(endDate!==""){
-            db.query("SELECT `fulldate`, `apname`, `channel24`, `power24`, `channel5`, `power5` FROM `ap_channal_data` WHERE date>=\'"+startDate+"\' AND date<=\'"+endDate+"\'", (err,result)=>{
-                if(err){
-                    console.log(err);
-                }
-                else{
-                    res.send(result);
-                }
-            })
-        }else{
-            db.query("SELECT `fulldate`, `apname`, `channel24`, `power24`, `channel5`, `power5` FROM `ap_channal_data` WHERE date=\'"+startDate+"\'", (err,result)=>{
-                if(err){
-                    console.log(err);
-                }
-                else{
-                    res.send(result);
-                }
-            })
-        }
-        
+        db.query("SELECT `fulldate`, `apname`, `channel24`, `power24`, `channel5`, `power5` FROM `ap_channal_data` WHERE date>=\'"+startDate+"\' AND date<=\'"+endDate+"\'", (err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
     }
     
 })
