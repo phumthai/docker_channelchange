@@ -57,9 +57,7 @@ export default class App extends Component {
       legend: {
         enabled: true
       },
-      xAxis: {
-        type: 'date',
-      },
+
       rangeSelector: {
         buttons: [{
           type: 'day',
@@ -98,7 +96,12 @@ export default class App extends Component {
     };
     return (
       <div>
-         <ReactHighcharts config = {configPrice}></ReactHighcharts>
+         <HighchartsReact 
+          
+          highcharts={Highcharts}
+          constructorType={"stockChart"}
+          options = {configPrice}
+         ></HighchartsReact>
       </div>
     )
   }
